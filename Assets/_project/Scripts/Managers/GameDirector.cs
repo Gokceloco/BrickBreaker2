@@ -10,5 +10,15 @@ public class GameDirector : MonoBehaviour
         {
             levelManager.RestartLevelManager();
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            levelManager.levelNo++;
+            levelManager.RestartLevelManager();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            levelManager.levelNo--;
+            levelManager.RestartLevelManager();
+        }
     }
 }
