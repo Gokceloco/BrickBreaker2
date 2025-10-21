@@ -22,7 +22,7 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Brick"))
         {
-            collision.gameObject.GetComponent<Brick>().GetHit(1);
+            collision.gameObject.GetComponentInParent<Brick>().GetHit(1);
         }
         if (collision.gameObject.CompareTag("BottomBorder"))
         {
