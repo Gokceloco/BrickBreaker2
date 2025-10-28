@@ -7,15 +7,18 @@ public class Ball : MonoBehaviour
 
     private Vector3 _dir = new Vector3(0,1,0);
 
+    private Rigidbody2D _rb;
+
     public void StartBall(GameDirector gameDirector)
     {
+        _rb = GetComponent<Rigidbody2D>();
         _gameDirector = gameDirector;
         _dir.x = Random.Range(-.5f, .5f);
     }
 
     private void Update()
-    {
-        transform.position += _dir * speed * Time.deltaTime;
+    {   
+        _rb.linearVelocity = _dir * speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

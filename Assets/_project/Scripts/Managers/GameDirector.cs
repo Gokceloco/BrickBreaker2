@@ -18,7 +18,7 @@ public class GameDirector : MonoBehaviour
 
     public void Win()
     {
-
+        mainUI.ShowWinUI();
     }
 
     public void Lose()

@@ -9,14 +9,13 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-
     }
-    private void FixedUpdate()
+    private void Update()
     {
         var xPos = (Input.mousePosition / Screen.width * 4f).x - 2;
 
         xPos = Mathf.Clamp(xPos, -2, 2);
 
-        transform.position = new Vector3(xPos, -4, 0);
+        _rb.position = new Vector3(xPos, -4, 0);
     }
 }

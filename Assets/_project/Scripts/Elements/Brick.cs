@@ -36,6 +36,7 @@ public class Brick : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
+            GetComponentInParent<Level>().BrickDestroyed(this);
             gameObject.SetActive(false);
         }
     }

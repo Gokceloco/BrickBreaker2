@@ -40,6 +40,7 @@ public class LevelManager : MonoBehaviour
         levelNo = Mathf.Clamp(levelNo, 1, levels.Count);
 
         _currentLevel = Instantiate(levels[levelNo - 1]);
+        _currentLevel.StartLevel(gameDirector);
     }
     private void DestroyCurrentLevel()
     {

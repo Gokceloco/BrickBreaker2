@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MainUI : MonoBehaviour
@@ -6,11 +7,14 @@ public class MainUI : MonoBehaviour
 
     public MainMenu mainMenu;
     public FailUI failUI;
+    public WinUI winUI;
+
 
     public void ShowMainMenu()
     {
         mainMenu.Show();
         failUI.Hide();
+        winUI.Hide();
     }
 
     public void ShowFailUI()
@@ -28,5 +32,16 @@ public class MainUI : MonoBehaviour
     {
         gameDirector.RestartLevel();
         failUI.Hide();
+    }
+
+    public void LoadNextLevelButtonPressed()
+    {
+        gameDirector.LoadNextLevel();
+        winUI.Hide();
+    }
+
+    public void ShowWinUI()
+    {
+        winUI.Show();
     }
 }
