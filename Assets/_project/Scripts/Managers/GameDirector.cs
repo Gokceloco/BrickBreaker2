@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameDirector : MonoBehaviour
 {
     public LevelManager levelManager;
+    public AudioManager audioManager;
 
     public MainUI mainUI;
 
@@ -19,6 +20,7 @@ public class GameDirector : MonoBehaviour
     public void Win()
     {
         mainUI.ShowWinUI();
+        levelManager.StopLevel();
     }
 
     public void Lose()
@@ -28,7 +30,8 @@ public class GameDirector : MonoBehaviour
 
     public void LoadNextLevel()
     {
-
+        levelManager.levelNo++;
+        levelManager.RestartLevelManager();
     }
 
     private void Update()

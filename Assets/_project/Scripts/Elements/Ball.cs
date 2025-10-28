@@ -24,15 +24,24 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _dir = Vector3.Reflect(_dir, collision.contacts[0].normal);
+        _gameDirector.audioManager.PlayImpactAS();
+
 
         if (collision.gameObject.CompareTag("Brick"))
         {
             collision.gameObject.GetComponentInParent<Brick>().GetHit(1);
+            _gameDirector.audioManager.PlayBrickHitAS();
         }
         if (collision.gameObject.CompareTag("BottomBorder"))
         {
             _gameDirector.Lose();
             gameObject.SetActive(false);
+            _gameDirector.audioManager.PlayFailAS();
         }
+    }
+
+    public void StopBall()
+    {
+        _dir = Vector3.zero;
     }
 }

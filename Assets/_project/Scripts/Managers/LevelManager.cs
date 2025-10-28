@@ -50,4 +50,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void StopLevel()
+    {
+        _currentBall.StopBall();
+    }
+
 }
