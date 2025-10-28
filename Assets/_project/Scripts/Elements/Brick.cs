@@ -34,15 +34,18 @@ public class Brick : MonoBehaviour
         healthText.DOColor(Color.red, .1f).SetLoops(2, LoopType.Yoyo);
         healthText.transform.DOPunchPosition(Vector3.one * punchScale, .2f, 30);
 
-        hitEffectSprite.transform.DOScale(.5f, .2f);
-        hitEffectSprite.DOFade(0, .15f);
-
-        hitEffectSprite.transform.DOScale(.22f, .01f).SetDelay(.2f);
-        hitEffectSprite.DOFade(1, .01f).SetDelay(.2f);
-
         if (_currentHealth <= 0)
         {
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        sprite.DOKill();
+        sprite.transform.DOKill();
+        spriteNoGlow.transform.DOKill();
+        healthText.DOKill();
+        healthText.transform.DOKill();
     }
 }

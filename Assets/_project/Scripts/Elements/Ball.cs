@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    private GameDirector _gameDirector;
     public float speed;
 
     private Vector3 _dir = new Vector3(0,1,0);
 
-    private void Start()
+    public void StartBall(GameDirector gameDirector)
     {
+        _gameDirector = gameDirector;
         _dir.x = Random.Range(-.5f, .5f);
     }
 
@@ -26,6 +28,7 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("BottomBorder"))
         {
+            _gameDirector.Lose();
             gameObject.SetActive(false);
         }
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public GameDirector gameDirector;
+
     public List<Level> levels;
 
     public int levelNo;
@@ -24,6 +26,7 @@ public class LevelManager : MonoBehaviour
     private void CreateNewBall()
     {
         _currentBall = Instantiate(ballPrefab, new Vector3(0,-2,0), Quaternion.identity);
+        _currentBall.StartBall(gameDirector);
     }
     private void DestroyCurrentBall()
     {

@@ -2,7 +2,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private void Update()
+    public float maxSpeed;
+    private Vector3 _targetPos;
+    private Rigidbody2D _rb;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+
+    }
+    private void FixedUpdate()
     {
         var xPos = (Input.mousePosition / Screen.width * 4f).x - 2;
 
