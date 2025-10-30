@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 201345787}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: PlayerPaddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -383,7 +383,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -396,8 +396,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 6
+  m_CollisionDetection: 1
+  m_Constraints: 7
 --- !u!1 &298421087
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,8 +871,9 @@ MonoBehaviour:
   gameDirector: {fileID: 1894269112}
   levels:
   - {fileID: 2809777121520087689, guid: e94842f0b968ec742824a68fcd642034, type: 3}
-  - {fileID: 2809777121520087689, guid: dd2c50a3d1bf2ed42be9d4baaddc2ed0, type: 3}
-  - {fileID: 2809777121520087689, guid: 3091dad528e93294cb3d2d57b608f49d, type: 3}
+  - {fileID: 2809777121520087689, guid: 5cfb76977e2fe9545a4107655acd917b, type: 3}
+  - {fileID: 2809777121520087689, guid: 80128049b2d71cd4991a6a4947b27e9b, type: 3}
+  - {fileID: 2809777121520087689, guid: fa896b36f54bcdd46ba4e016b8ef777d, type: 3}
   levelNo: 1
   ballPrefab: {fileID: 200149780705269846, guid: affffadd9bc636940b9c02b3d345f6e0, type: 3}
 --- !u!1 &451541829
@@ -1443,6 +1444,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815900165}
   m_CullTransparentMesh: 1
+--- !u!1 &859101919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 859101920}
+  - component: {fileID: 859101921}
+  m_Layer: 0
+  m_Name: FXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &859101920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859101919}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1894269111}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &859101921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859101919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d8baca61e661842a375dda4c295f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FXManager
+  impactPS: {fileID: 4075908802436221986, guid: 04af6b8dbd3871f45bb921bffc72d72b, type: 3}
 --- !u!1 &918049008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,7 +1847,7 @@ GameObject:
   - component: {fileID: 1286155712}
   m_Layer: 0
   m_Name: Sprite Chamfered
-  m_TagString: Untagged
+  m_TagString: PlayerPaddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3103,6 +3149,7 @@ Transform:
   m_Children:
   - {fileID: 445629243}
   - {fileID: 1807342247}
+  - {fileID: 859101920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1894269112
@@ -3119,7 +3166,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameDirector
   levelManager: {fileID: 445629244}
   audioManager: {fileID: 1807342248}
+  fxManager: {fileID: 859101921}
   mainUI: {fileID: 1843610360}
+  timeScale: 1
 --- !u!1 &1938783095
 GameObject:
   m_ObjectHideFlags: 0

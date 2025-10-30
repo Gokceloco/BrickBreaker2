@@ -4,8 +4,9 @@ public class GameDirector : MonoBehaviour
 {
     public LevelManager levelManager;
     public AudioManager audioManager;
+    public FXManager fxManager;
 
-    public MainUI mainUI;
+    public MainUI mainUI;    
 
     private void Start()
     {
@@ -34,8 +35,12 @@ public class GameDirector : MonoBehaviour
         levelManager.RestartLevelManager();
     }
 
+    public float timeScale;
+
     private void Update()
     {
+        Time.timeScale = timeScale;
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             levelManager.RestartLevelManager();

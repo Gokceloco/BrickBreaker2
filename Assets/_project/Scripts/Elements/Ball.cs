@@ -16,16 +16,15 @@ public class Ball : MonoBehaviour
         _dir.x = Random.Range(-.5f, .5f);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {   
-        _rb.linearVelocity = _dir * speed;
+        _rb.linearVelocity = _dir.normalized * speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _dir = Vector3.Reflect(_dir, collision.contacts[0].normal);
         _gameDirector.audioManager.PlayImpactAS();
-
 
         if (collision.gameObject.CompareTag("Brick"))
         {
@@ -38,6 +37,15 @@ public class Ball : MonoBehaviour
             gameObject.SetActive(false);
             _gameDirector.audioManager.PlayFailAS();
         }
+        if (collision.gameObject.CompareTag("PlayerPaddle"))
+        {
+            if (transform.position.y < -4f && _dir.y > 0)
+            {
+                _dir.y *= -1;
+            }
+        }
+
+        _gameDirector.fxManager.PlayImpactPS(collision.contacts[0].point);
     }
 
     public void StopBall()

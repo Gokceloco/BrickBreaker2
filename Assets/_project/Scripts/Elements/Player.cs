@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
         var xPos = (Input.mousePosition / Screen.width * 4f).x - 2;
 

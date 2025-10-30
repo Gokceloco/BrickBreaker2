@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Brick
   - BottomBorder
+  - PlayerPaddle
   layers:
   - Default
   - TransparentFX
