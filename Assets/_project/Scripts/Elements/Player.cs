@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float maxSpeed;
     private Vector3 _targetPos;
     private Rigidbody2D _rb;
 
@@ -14,7 +13,7 @@ public class Player : MonoBehaviour
     {
         var xPos = (Input.mousePosition / Screen.width * 4f).x - 2;
 
-        xPos = Mathf.Clamp(xPos, -2, 2);
+        xPos = Mathf.Clamp(xPos, -2f, 2f);
 
         _rb.position = new Vector3(xPos, -4, 0);
     }

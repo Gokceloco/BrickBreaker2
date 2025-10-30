@@ -201,3 +201,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ball
   speed: 5
+  xDirMultiplier: 1
+  playerParticleColor: {r: 0.773, g: 0.816, b: 1, a: 1}

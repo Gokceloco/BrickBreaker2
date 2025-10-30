@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
+    private GameDirector _gameDirector;
     public float punchPower;
 
     public int startHealth;
@@ -17,8 +18,9 @@ public class Brick : MonoBehaviour
 
     public float punchScale;
 
-    private void Start()
+    public void StartBrick(GameDirector gameDirector)
     {
+        _gameDirector = gameDirector;
         _currentHealth = startHealth;
         healthText.text = _currentHealth.ToString();
         sprite.DOFade(0, .5f).SetLoops(-1, LoopType.Yoyo);
@@ -36,6 +38,7 @@ public class Brick : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
+            _gameDirector.fxManager.PlayBrickDestroyPS(transform.position);
             GetComponentInParent<Level>().BrickDestroyed(this);
             gameObject.SetActive(false);
         }

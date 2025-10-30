@@ -13,6 +13,10 @@ public class Level : MonoBehaviour
     {
         _gameDirector = gameDirector;
         _bricks = GetComponentsInChildren<Brick>().ToList();
+        foreach (var b in _bricks)
+        {
+            b.StartBrick(_gameDirector);
+        }
     }
 
     public void BrickDestroyed(Brick brick)

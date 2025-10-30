@@ -13,7 +13,7 @@ public class FailUI : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
-        _canvasGroup.DOFade(1, .2f);
+        _canvasGroup.DOFade(1, .2f).SetDelay(1f);
     }
 
     public void Hide()
