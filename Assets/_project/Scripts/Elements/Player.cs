@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameDirector gameDirector;
     private Vector3 _targetPos;
     private Rigidbody2D _rb;
 
@@ -16,5 +17,14 @@ public class Player : MonoBehaviour
         xPos = Mathf.Clamp(xPos, -2f, 2f);
 
         _rb.position = new Vector3(xPos, -4, 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Powerup"))
+        {
+            Destroy(collision.gameObject);
+            gameDirector.levelManager.BallPowerUpCollected(collision.transform.position);
+        }
     }
 }

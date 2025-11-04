@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
@@ -13,33 +14,40 @@ public class LevelManager : MonoBehaviour
     public Ball ballPrefab;
 
     private Level _currentLevel;
-    private Ball _currentBall;
+
+    public List<Ball> activeBalls;
+
+    private void Start()
+    {
+        levelNo = Mathf.Max(PlayerPrefs.GetInt("HighestLevelReached"), 1);
+    }
 
     public void RestartLevelManager()
-    {
+    {        
         DestroyCurrentLevel();
         CreateNewLevel();
-        DestroyCurrentBall();
-        CreateNewBall();
+        DestroyActiveBalls();
+        CreateNewBall(new Vector3(0,-2,0));
     }
 
-    private void CreateNewBall()
+    private void CreateNewBall(Vector3 pos)
     {
-        _currentBall = Instantiate(ballPrefab, new Vector3(0,-2,0), Quaternion.identity);
-        _currentBall.StartBall(gameDirector);
+        var newBall = Instantiate(ballPrefab, pos, Quaternion.identity);
+        newBall.transform.SetParent(_currentLevel.transform);
+        newBall.StartBall(gameDirector);
+        activeBalls.Add(newBall);
     }
-    private void DestroyCurrentBall()
+    private void DestroyActiveBalls()
     {
-        if (_currentBall != null)
+        foreach (var b in activeBalls)
         {
-            Destroy(_currentBall.gameObject);
+            Destroy(b.gameObject);
         }
+        activeBalls.Clear();        
     }
     private void CreateNewLevel()
     {
-        levelNo = Mathf.Clamp(levelNo, 1, levels.Count);
-
-        _currentLevel = Instantiate(levels[levelNo - 1]);
+        _currentLevel = Instantiate(levels[0]);
         _currentLevel.StartLevel(gameDirector);
     }
     private void DestroyCurrentLevel()
@@ -52,7 +60,23 @@ public class LevelManager : MonoBehaviour
 
     public void StopLevel()
     {
-        _currentBall.StopBall();
+        foreach (var b in activeBalls)
+        {
+            b.StopBall();
+        }
     }
 
+    public void BallDestroyed(Ball ball)
+    {
+        activeBalls.Remove(ball);
+        if (activeBalls.Count <= 0)
+        {
+            gameDirector.Lose();
+        }
+    }
+
+    public void BallPowerUpCollected(Vector3 pos)
+    {
+        CreateNewBall(pos);
+    }
 }

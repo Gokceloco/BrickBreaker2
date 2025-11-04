@@ -4,6 +4,8 @@ public class GameDirector : MonoBehaviour
 {
     public LevelManager levelManager;
     public AudioManager audioManager;
+    public PowerupManager powerupManager;
+
     public FXManager fxManager;
 
     public MainUI mainUI;    
@@ -20,6 +22,7 @@ public class GameDirector : MonoBehaviour
 
     public void Win()
     {
+        PlayerPrefs.SetInt("HighestLevelReached", levelManager.levelNo + 1);
         mainUI.ShowWinUI();
         levelManager.StopLevel();
     }

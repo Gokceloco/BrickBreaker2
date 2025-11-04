@@ -28,6 +28,15 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _dir = Vector3.Reflect(_dir, collision.contacts[0].normal);
+
+        if (_dir.y < 0 && _dir.y > -.1f)
+        {
+            _dir.y = -.1f;
+        }
+        else if (_dir.y > 0 && _dir.y < .1f)
+        {
+            _dir.y = .1f;
+        }
         _gameDirector.audioManager.PlayImpactAS();
         var particleColor = Color.white;
 
@@ -39,14 +48,14 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("BottomBorder"))
         {
-            _gameDirector.Lose();
-            gameObject.SetActive(false);
+            _gameDirector.levelManager.BallDestroyed(this);
+            Destroy(gameObject);
             _gameDirector.audioManager.PlayFailAS();
             particleColor = Color.red;
         }
         if (collision.gameObject.CompareTag("PlayerPaddle"))
         {
-            if (transform.position.y < -4f && _dir.y > 0)
+            if ((transform.position.y < -4f && _dir.y > 0) || (transform.position.y > -4f && _dir.y < 0))
             {
                 _dir.y *= -1;
             }

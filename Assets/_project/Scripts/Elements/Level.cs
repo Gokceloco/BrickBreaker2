@@ -8,15 +8,16 @@ public class Level : MonoBehaviour
 {
     private GameDirector _gameDirector;
     private List<Brick> _bricks = new List<Brick>();
+
+    public Brick brickPrefab;
+
+    public List<Transform> availableSpawnPositions;
         
     public void StartLevel(GameDirector gameDirector)
     {
         _gameDirector = gameDirector;
         _bricks = GetComponentsInChildren<Brick>().ToList();
-        foreach (var b in _bricks)
-        {
-            b.StartBrick(_gameDirector);
-        }
+        GenerateParametricLevel();    
     }
 
     public void BrickDestroyed(Brick brick)
@@ -26,5 +27,34 @@ public class Level : MonoBehaviour
         {
             _gameDirector.Win();
         }
+        else
+        {
+            if (Random.value < .2f)
+            {
+                _gameDirector.powerupManager.SummonPowerUp(brick.transform.position);
+            }
+        }
+    }
+
+    private void GenerateParametricLevel()
+    {
+        var state = Random.state;
+        Random.InitState(_gameDirector.levelManager.levelNo);
+
+        var brickCount = Mathf.Min(_gameDirector.levelManager.levelNo, availableSpawnPositions.Count-5);
+
+        for (int i = 0; i < brickCount; i++)
+        {
+            var chosenSpawnPos = availableSpawnPositions[Random.Range(0,availableSpawnPositions.Count)];
+
+            var newBrick = Instantiate(brickPrefab, transform);
+            newBrick.transform.position = chosenSpawnPos.position;
+            newBrick.StartBrick(_gameDirector);
+            _bricks.Add(newBrick);
+
+            availableSpawnPositions.Remove(chosenSpawnPos);
+        }
+
+        Random.state = state;
     }
 }

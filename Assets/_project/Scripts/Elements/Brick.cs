@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -21,6 +20,8 @@ public class Brick : MonoBehaviour
     public void StartBrick(GameDirector gameDirector)
     {
         _gameDirector = gameDirector;
+        var levelNo = _gameDirector.levelManager.levelNo;
+        startHealth = Random.Range(1,6) + levelNo / 10;
         _currentHealth = startHealth;
         healthText.text = _currentHealth.ToString();
         sprite.DOFade(0, .5f).SetLoops(-1, LoopType.Yoyo);

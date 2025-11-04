@@ -44,4 +44,9 @@ public class MainUI : MonoBehaviour
     {
         winUI.Show();
     }
+
+    public void QuitButtonPressed()
+    {
+        Application.Quit();
+    }
 }
